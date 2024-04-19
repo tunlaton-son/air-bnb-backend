@@ -1,0 +1,43 @@
+package com.core.airbnbclonebackend.enums;
+
+public enum Amenities {
+
+    WIFI("WIFI"),
+    TV("TV"),
+    KITCHEN("KITCHEN"),
+    WASHER("WASHER"),
+    FREE_PARKING_ON_PREMISES("FREE_PARKING_ON_PREMISES"),
+    PAID_PARKING_ON_PREMISES("PAID_PARKING_ON_PREMISES"),
+    AIR_CONDITIONING("AIR_CONDITIONING"),
+    DEDICATED_WORKSPACE("DEDICATED_WORKSPACE"),
+    POOL("POOL"),
+    HOT_TUBE("HOT_TUBE"),
+    PATIO("PATIO"),
+    BBQ_GRILL("BBQ_GRILL"),
+    OUTDOOR_DINING_AREA("OUTDOOR_DINING_AREA"),
+    FIRE_PIT("FIRE_PIT"),
+    POOL_TABLE("POOL_TABLE"),
+    INDOOR_FIREPLACE("INDOOR_FIREPLACE"),
+    PIANO("PIANO"),
+    EXERCISE_EQUIPMENT("EXERCISE_EQUIPMENT"),
+    LAKE_ACCESS("LAKE_ACCESS"),
+    BEACH_ACCESS("BEACH_ACCESS"),
+    SKI_IN_SKI_OUT("SKI_IN_SKI_OUT"),
+    OUTDOOR_SHOWER("OUTDOOR_SHOWER"),
+    SMOKE_ALARM("SMOKE_ALARM"),
+    FIRST_AID_KITCHEN("FIRST_AID_KITCHEN"),
+    FIRE_EXTINGUISHER("FIRE_EXTINGUISHER"),
+    CARBON_MONOXIDE_ALARM("CARBON_MONOXIDE_ALARM"),
+    ;
+
+    private final String value;
+
+    Amenities(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
+}

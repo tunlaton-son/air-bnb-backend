@@ -1,21 +1,20 @@
 package com.core.airbnbclonebackend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.UUID;
+import java.util.*;
 
 @Table(name = "_USER")
 @Entity(name = "User")
 @NoArgsConstructor
 @Data
+@ToString
 public class User implements UserDetails {
 
     @Id
@@ -31,8 +30,28 @@ public class User implements UserDetails {
     @Column(name = "PHONE")
     private String phone;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private GovernmentDoc governmentDoc;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+    @ToString.Exclude
+    private List<Listing> listingList = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+    @ToString.Exclude
+    private List<Reservation> reservationList = new ArrayList<>();
+
     @Column(name = "PASSWORD")
     private String password;
+
+    @Column(name = "IS_IDENTITY_VERIFIED")
+    private Boolean isIdentityVerified = false;
+
+    @Column(name = "IS_PHONE_VERIFIED")
+    private Boolean isPhoneVerified = false;
+
+    @Column(name = "IS_ACCOUNT_VERIFIED")
+    private Boolean isAccountVerified = false;
 
     public User(String email, String name, String phone, String password) {
         this.id = UUID.randomUUID();
