@@ -17,6 +17,8 @@ public class ListingRequest {
 
     private String listingId;
 
+    private String userId;
+
     private String title;
 
     private BigDecimal price;

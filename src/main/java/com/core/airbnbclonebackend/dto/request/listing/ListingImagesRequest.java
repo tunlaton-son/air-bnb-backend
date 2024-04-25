@@ -21,4 +21,6 @@ public class ListingImagesRequest {
     private String listingId;
 
     private MultipartFile file;
+
+    private boolean coverImage;
 }

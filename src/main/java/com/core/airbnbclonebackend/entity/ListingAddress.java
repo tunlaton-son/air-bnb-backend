@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
@@ -13,7 +15,10 @@ import java.util.UUID;
 @Entity(name = "LISTING_ADDRESS")
 @NoArgsConstructor
 @Data
-public class ListingAddress {
+public class ListingAddress implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "ID", length = 50)

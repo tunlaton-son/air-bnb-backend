@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,7 +14,10 @@ import java.util.UUID;
 @Entity(name = "LISTING_IMAGES")
 @NoArgsConstructor
 @Data
-public class ListingImages {
+public class ListingImages implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "ID", length = 50)

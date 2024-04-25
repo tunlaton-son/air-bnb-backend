@@ -22,10 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -126,7 +123,8 @@ public class FileStorageService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
 
-        String originalFilename = multipartFile.getOriginalFilename();
+        String fileName = multipartFile.getOriginalFilename() != null ? multipartFile.getOriginalFilename() : "";
+        String originalFilename = Objects.requireNonNull(fileName).substring(0, Math.min(fileName.length(), 50));
         FileDescriptor fileDescriptor = new FileDescriptor();
 
         String extension = FilenameUtils.getExtension(originalFilename);

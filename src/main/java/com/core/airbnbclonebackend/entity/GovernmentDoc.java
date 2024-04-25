@@ -1,13 +1,13 @@
 package com.core.airbnbclonebackend.entity;
 
 import com.core.airbnbclonebackend.enums.IdType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,7 +15,10 @@ import java.util.UUID;
 @Entity(name = "GOVERNMENT_DOC")
 @NoArgsConstructor
 @Data
-public class GovernmentDoc {
+public class GovernmentDoc implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "ID", length = 50)
@@ -33,6 +36,10 @@ public class GovernmentDoc {
     @Column(name = "BACK_IMAGE_SRC")
     private String backImageSrc;
 
+    @OneToOne(mappedBy = "governmentDoc", fetch = FetchType.EAGER)
+    @JsonBackReference
+    private User user;
+
     @Column(name = "CREATED_BY",length = 50)
     private String createdBy;
 
@@ -44,4 +51,19 @@ public class GovernmentDoc {
 
     @Column(name = "UPDATE_TS")
     private Date updateTs = new Date();
+
+    public GovernmentDoc(UUID id, IdType idType, String country, User user) {
+        this.id = id;
+        this.idType = idType;
+        this.country = country;
+        this.user = user;
+    }
+
+    public GovernmentDoc(UUID id, IdType idType, String country, String frontImageSrc, String backImageSrc) {
+        this.id = id;
+        this.idType = idType;
+        this.country = country;
+        this.frontImageSrc = frontImageSrc;
+        this.backImageSrc = backImageSrc;
+    }
 }

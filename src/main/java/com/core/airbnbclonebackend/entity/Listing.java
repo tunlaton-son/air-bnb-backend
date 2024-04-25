@@ -9,6 +9,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -16,7 +18,10 @@ import java.util.*;
 @Entity(name = "LISTING")
 @NoArgsConstructor
 @Data
-public class Listing {
+public class Listing implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "ID", length = 50)
@@ -59,7 +64,7 @@ public class Listing {
     @JsonManagedReference
     private List<ListingImages> listingImages = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "userId")
     private User user;
 
@@ -117,7 +122,7 @@ public class Listing {
     @Column(name = "UPDATE_TS")
     private Date updateTs = new Date();
 
-    public Listing(UUID id ,String title, BigDecimal price, String description, String category, String placeType, Integer guestCount, Integer roomCount, Integer bathroomCount, Boolean isBedRoomHaveLock, List<Amenities> amenities, ConfirmReservationType confirmReservationType, GuestType guestType, Boolean isNewListingPromotion, Boolean isWeeklyDiscount, BigDecimal weeklyDiscount, Boolean isMonthlyDiscount, BigDecimal monthlyDiscount, Boolean hasSecurityCameras, Boolean hasNoiseMonitors, Boolean hasWeapons, Step step, ListingAddress listingAddress) {
+    public Listing(UUID id ,String title, BigDecimal price, String description, String category, String placeType, Integer guestCount, Integer roomCount, Integer bathroomCount, Boolean isBedRoomHaveLock, List<Amenities> amenities, ConfirmReservationType confirmReservationType, GuestType guestType, Boolean isNewListingPromotion, Boolean isWeeklyDiscount, BigDecimal weeklyDiscount, Boolean isMonthlyDiscount, BigDecimal monthlyDiscount, Boolean hasSecurityCameras, Boolean hasNoiseMonitors, Boolean hasWeapons, Step step, ListingAddress listingAddress, User user) {
         this.id = id;
         this.title = title;
         this.price = price;
@@ -141,5 +146,6 @@ public class Listing {
         this.hasWeapons = hasWeapons;
         this.step = step;
         this.listingAddress = listingAddress;
+        this.user = user;
     }
 }

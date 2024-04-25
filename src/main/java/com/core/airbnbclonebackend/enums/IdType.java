@@ -3,7 +3,7 @@ package com.core.airbnbclonebackend.enums;
 public enum IdType {
     DRIVER_LICENSE("DRIVER_LICENSE"),
     PASSPORT("PASSPORT"),
-    IDENTITY_CARD("IDENTITY_CARD"),
+    ID_CARD("ID_CARD"),
     ;
 
     private final String value;

@@ -32,6 +32,10 @@ public enum Step {
         this.value = value;
     }
 
+    public Integer getValue() {
+        return value;
+    }
+
     public Step getStep(Integer step){
         return Arrays.stream(Step.values()).filter(e-> Objects.equals(e.value, step)).findFirst().orElse(null);
     }
